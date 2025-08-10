@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday</title>
+  <link rel="stylesheet" href="Style.css">
+  <style>
+    /* Extra only for background split effect */
+    body {
+      background-color: #b5e8b7; /* pastel green */
+      transition: background 1s ease;
+    }
+    .split-background {
+      display: flex;
+      height: 100vh;
+      width: 100%;
+    }
+    .left-half, .right-half {
+      flex: 1;
+      transition: background-color 1s ease;
+    }
+    .left-half {
+      background-color: #b5e8b7; /* pastel green */
+    }
+    .right-half {
+      background-color: #b5e8b7; /* changes on cake/disco */
+    }
+     /* Footer message styling */
+    #footer-message {
+      position: fixed;
+      bottom: 10px;
+      width: 100%;
+      text-align: center;
+      font-size: 14px;
+      color: rgb(246, 32, 32);
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+<div class="split-background">
+  <div class="left-half">
+    <div class="top-section">
+      <div class="photo-container">
+        <img id="her-photo" src="her1.jpg" alt="Her Picture">
+      </div>
+
+      <div class="heading-container">
+        <h1>Happy Birthday <span id="nickname">Muskii</span> 🎉</h1>
+      </div>
+
+      <div id="music-controls">
+        <img src="disco.png" id="discoBtn" alt="Disco Ball" class="disco-icon">
+        <div class="cake-controls">
+          <img src="prev.png" id="prevBtn" alt="Previous Song">
+          <img src="cake.png" id="cakeBtn" alt="Cake">
+          <img src="next.png" id="nextBtn" alt="Next Song">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right-half"></div>
+</div>
+<!-- Footer message -->
+<div id="footer-message">I'm glad to tell you that, you are my motivation to learn more about this HTML even if it was my effort to present this on you birthday as a dil wala gift (also sorry that i had to courier you this at the end when i didn't had any choice left). I was also hoping to you to be my teacher, a smart and beautiful indeed so man bhi lagega na mera 🫠. Yes this message is added on later so Happy Belated Birthday my Queen ❤👑 my cutipie sugar my kuchu puchu 🤏🏻😂. P.S. next time milna taiyar hoke proper jaise is baar thi exactly aesa fir jab tak m cake nahi katwa paunga mere end se mujhe behad kharab lagega so please ye request maan lo abhi ki bas. Ab i don't think ki mujhe yaha zyada kuch likhna chahiye asthetic kharab ho jaegi nahi toh 😂 or haan kuch optimize ya achaa karna ho toh batana and yes ye sole mene nahi kiya hai I took help of AI but haan sachh m I'm learning in background side by side or abhi bhi continue rakhunga. P.S.Cake ya Discoball pe click karna !</div>
+
+<script>
+const photos = ["her1.jpg", "her2.jpg", "her3.jpg", "her4.jpg", "her5.jpg", "her6.jpg", "her7.png", "her8.jpg", "her9.jpg", "her10.jpg", "her11.png", "her12.png", "her13.png", "her14.jpg", "her15.jpg", "her16.jpg", "her17.jpg", "her18.png", "her19.png", "her20.png", "her21.png"];
+const photoElement = document.getElementById("her-photo");
+let photoIndex = 0;
+function changePhoto() {
+  const randomIndex = Math.floor(Math.random() * photos.length);
+  photoElement.src = photos[randomIndex];
+}
+setInterval(changePhoto, 5000);
+
+const nicknames = ["Muskii", "Anshi", "Barbie", "Sunshine", "Khoobsurat", "Sundari", "Maal", "Chulbuli", "Good girl", "Hansini", "Ms World", "Sweetheart", "Pasta", "Babu", "Champ", "Bilauti", "Princess", "Sleepy Head", "Sugar", "Hottie"];
+const nicknameElement = document.getElementById("nickname");
+let nicknameIndex = 0;
+function changeNickname() {
+  const randomIndex = Math.floor(Math.random() * nicknames.length);
+  nicknameElement.textContent = nicknames[randomIndex];
+}
+setInterval(changeNickname, 5000);
+
+// Music functionality
+const cakeSongs = ["cake1.mp3", "cake2.mp3" , "cake3.mp3" , "cake4.mp3" , "cake5.mp3"];
+const discoSongs = ["disco1.mp3", "disco2.mp3", "disco3.mp3", "disco4.mp3", "disco5.mp3", "disco6.mp3", "disco7.mp3", "disco8.mp3", "disco9.mp3", "disco10.mp3", "disco11.mp3"];
+let cakeIndex = 0;
+let discoIndex = 0;
+const cakeAudio = new Audio();
+const discoAudio = new Audio();
+const cakeBtn = document.getElementById("cakeBtn");
+const discoBtn = document.getElementById("discoBtn");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+let currentCategory = null;
+const rightHalf = document.querySelector(".right-half");
+
+function playSong(category) {
+  if (category === "cake") {
+    if (!discoAudio.paused) { discoAudio.pause(); discoAudio.currentTime = 0; }
+    if (cakeAudio.src !== getFullUrl(cakeSongs[cakeIndex])) {
+      cakeAudio.src = cakeSongs[cakeIndex];
+    }
+    cakeAudio.play();
+    currentCategory = "cake";
+    rightHalf.style.backgroundColor = "#F28500"; // Tangerine orange
+  } else if (category === "disco") {
+    if (!cakeAudio.paused) { cakeAudio.pause(); cakeAudio.currentTime = 0; }
+    if (discoAudio.src !== getFullUrl(discoSongs[discoIndex])) {
+      discoAudio.src = discoSongs[discoIndex];
+    }
+    discoAudio.play();
+    currentCategory = "disco";
+    rightHalf.style.backgroundColor = "#3B3C36"; // black olive
+  }
+}
+
+function toggleCategory(category) {
+  if (category === "cake") {
+    if (cakeAudio.paused) {
+      playSong("cake");
+    } else {
+      cakeAudio.pause();
+      rightHalf.style.backgroundColor = "#b5e8b7";
+    }
+  } else if (category === "disco") {
+    if (discoAudio.paused) {
+      playSong("disco");
+    } else {
+      discoAudio.pause();
+      rightHalf.style.backgroundColor = "#b5e8b7";
+    }
+  }
+}
+
+function changeSong(direction) {
+  if (currentCategory === "cake") {
+    cakeIndex = (cakeIndex + direction + cakeSongs.length) % cakeSongs.length;
+    playSong("cake");
+  } else if (currentCategory === "disco") {
+    discoIndex = (discoIndex + direction + discoSongs.length) % discoSongs.length;
+    playSong("disco");
+  }
+}
+
+function getFullUrl(filename) {
+  const link = document.createElement("a");
+  link.href = filename;
+  return link.href;
+}
+
+cakeBtn.addEventListener("click", () => toggleCategory("cake"));
+discoBtn.addEventListener("click", () => toggleCategory("disco"));
+prevBtn.addEventListener("click", () => changeSong(-1));
+nextBtn.addEventListener("click", () => changeSong(1));
+</script>
+</body>
+</html>

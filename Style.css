@@ -1,0 +1,94 @@
+body {
+  font-family: sans-serif;
+  background-color: #ffeef8;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.top-section {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+.photo-container {
+  position: absolute;
+  top: 200px;   /* space below heading */
+  left: 150px;   /* fixed distance from left edge */
+  width: 400px;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#her-photo {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 15px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  object-fit: cover; /* fills frame without distortion */
+}
+
+/* Music controls independently placed on right */
+#music-controls {
+  position: absolute;
+  top: 0px;  /* aligns roughly with photo top */
+  right: 250px; /* fixed distance from right edge */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+/* Arrows smaller than cake/disco */
+#prevBtn, #nextBtn {
+  width: 50px;
+  height: 50px;
+}
+
+/* Move heading to the top */
+.heading-container {
+  -webkit-text-stroke: 1px white; /* thin white outline */
+  color: inherit; /* keep your current fill color */
+  position: absolute; /* take out of flex alignment */
+  top: 80px;           /* distance from top of page */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+h1 {
+  color: #ff4081;
+  font-family: 'Comic Sans MS', cursive, sans-serif; /* playful look */
+  font-size: 1.8rem;
+}
+
+#music-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 100px;
+}
+
+.disco-icon {
+  width: 360px; /* change as needed */
+  height: 270px;
+}
+
+.cake-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* keeps them grouped */
+  gap: 0px; /* space between each item (arrow-cake-arrow) */
+  background: none; /* remove pink background if not wanted */
+  width: auto; /* shrink-wrap to content instead of full width */
+}
+
+.cake-controls img {
+  width: 300px; /* all same size */
+  height: 225px;
+  object-fit: contain;
+}
