@@ -15,7 +15,7 @@ body {
 }
 .photo-container {
   position: absolute;
-  top: 200px;   /* space below heading */
+  top: 180px;   /* space below heading */
   left: 150px;   /* fixed distance from left edge */
   width: 400px;
   height: 400px;
